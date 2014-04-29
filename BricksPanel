@@ -1,1 +1,16 @@
 //FIRST CLASS WHICH INCLUDES ALL BRICKS IN PANEL
+
+package Brick_Breaker;
+
+import java.util.ArrayList;
+
+import javax.swing.JPanel;
+
+public class BricksPanel extends JPanel {
+	ArrayList<Brick> bricks = new ArrayList<Brick>();
+
+	public void addBrick(int x, int y) {
+		bricks.add(new Brick(x, y));
+	}
+
+

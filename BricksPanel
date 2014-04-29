@@ -16,6 +16,7 @@ public class BricksPanel extends JPanel {
 	public void addBrick(int x, int y) {     
 		bricks.add(new Brick(x, y));
 	}
+	//paints the brick.
 	public void paint(Graphics g) {
 		super.paint(g);
 		for (int i = 0; i < bricks.size(); i++) {

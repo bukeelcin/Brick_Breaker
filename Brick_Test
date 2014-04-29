@@ -1,1 +1,12 @@
 //MAIN CLASS
+package Brick_Breaker;
+import javax.swing.JFrame;
+
+public class Brick_Test {
+	public static void main(String[] args) throws InterruptedException {
+		JFrame frame = new JFrame();
+		frame.setTitle("CS320");
+		frame.setSize(800, 700);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+}

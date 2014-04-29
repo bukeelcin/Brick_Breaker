@@ -9,9 +9,11 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class BricksPanel extends JPanel {
+
+	//bricks is an arraylist that contains bricks
 	ArrayList<Brick> bricks = new ArrayList<Brick>();
 
-	public void addBrick(int x, int y) {
+	public void addBrick(int x, int y) {     
 		bricks.add(new Brick(x, y));
 	}
 	public void paint(Graphics g) {

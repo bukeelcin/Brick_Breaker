@@ -1,0 +1,22 @@
+
+
+import java.awt.Color;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Floor extends Brick {
+	private int x, y,width,height;
+	private Color color;
+
+	public Floor(int x, int y,int width,int height) {
+		super(x, y, width, height,Color.GREEN);
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+	}
+
+}

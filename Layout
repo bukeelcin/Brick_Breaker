@@ -1,0 +1,43 @@
+package Brick_Breaker;
+
+//MOVE AND CHECKCOLLISION METHODS WILL BE ADDED LATER ON.
+import java.awt.Color;
+import java.awt.Graphics;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.security.GuardedObject;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class Layout extends JPanel {
+	ArrayList<Brick> bricks;
+	Floor floor;
+	Ball ball;
+	int Vx, Vy;
+
+	public Layout() {
+		bricks = new ArrayList<Brick>();
+		floor = new Floor(200, 450, 100, 20);
+		ball = new Ball(240, 440, 10, 10);
+		MyMouseListener listener = new MyMouseListener(floor);
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
+	}
+
+	public void addBrick(int x, int y, int width, int height, Color color) {
+		bricks.add(new Brick(x, y, width, height, color));
+	}
+
+	public void paint(Graphics g) {
+		super.paint(g);
+		g.setColor(Color.BLUE);
+		for (int i = 0; i < bricks.size(); i++) {
+			Brick brick = bricks.get(i);
+			brick.drawOn(g);
+		}
+		floor.drawOn(g);
+		ball.drawOn(g);
+	}

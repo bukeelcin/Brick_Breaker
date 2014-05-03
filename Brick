@@ -1,22 +1,51 @@
-//JUST ONE BRICK
 
-package Brick_Breaker;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Brick {
+	private int x, y, height, width;
 
-	private int x, y;
+	private Color color;
 
-	public Brick(int x, int y) {
+	public Brick(int x, int y, int width, int height, Color color) {
 		this.x = x;
+		this.y = y;
+		this.height = height;
+		this.width = width;
+		this.color = color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public void drawOn(Graphics g) {
+		g.fillRect(x, y, 20, 20);
+		g.draw3DRect(x, y, 20, 20, false);
+	}
+
+	public void Bonus() {
+		width = +20;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
 		this.y = y;
 	}
 
-	public void draw(Graphics g) {
+	public int getHeight() {
+		return height;
+	}
 
-		g.fillRect(x, y, 20, 20);
-		g.draw3DRect(x, y, 20, 20, false);
-
+	public int getWidth() {
+		return width;
 	}
 }

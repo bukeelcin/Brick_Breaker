@@ -19,6 +19,14 @@ public class Floor extends Brick {
 		this.height = height;
 	}
 	
+	public void drawOn(Graphics g) {
+		g.setColor(Color.CYAN);
+		g.fillRect(x, y, width, height);
+		
+		g.setColor(Color.RED);
+		g.drawRect(x-1, y-1, width, height);
+	}
+	
 	public int getX() {
 		return x;
 	}

@@ -1,6 +1,7 @@
 package Brick_Breaker;
 
-//MOVE AND CHECKCOLLISION METHODS WILL BE ADDED LATER ON.
+//MOVE METHOD IS ADDED 
+//CHECK COLLISION WILL BE ADDED. 
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -40,4 +41,33 @@ public class Layout extends JPanel {
 		}
 		floor.drawOn(g);
 		ball.drawOn(g);
+	}
+	public void Move() throws InterruptedException {
+		Vx = 5;
+		Vy = -5;
+		while (true) {
+			ball.setX(Vx);
+			ball.setY(Vy);
+			if (ball.getX() == 580 || ball.getX() == 0) {
+				Vx = -Vx;
+			}
+			if ((ball.getY() == 0) || (bounce() && ball.getY() == 640)) {
+				Vy = -Vy;
+			}
+			if (ball.getY() > 720) {
+				System.exit(0);
+			}
+			Thread.currentThread().sleep(15);
+			for (int i = 0; i < bricks.size(); i++) {
+				Brick brick = bricks.get(i);
+				if (checkcollision(brick)) {
+					bricks.remove(i);
+					Layout.score += 10;
+					if(score>=50)
+						Layout.level = 2;
+				}
+			}
+			repaint();
+
+		}
 	}

@@ -1,7 +1,7 @@
 package Brick_Breaker;
 
 //MOVE METHOD IS ADDED 
-//CHECK COLLISION WILL BE ADDED. 
+//CHECK COLLISION IS ADDED AS WELL. 
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -70,4 +70,47 @@ public class Layout extends JPanel {
 			repaint();
 
 		}
+		public boolean bounce() {
+		return floor.getX() <= ball.getX()
+				&& ball.getX() <= floor.getX() + floor.size();
+
+	}
+
+	public boolean checkcollision(Brick brick) {
+
+		if ((brick.getX() < ball.getX() + 5 && ball.getX() + 5 < brick.getX()
+				+ brick.getWidth())
+				&& (ball.getY() == brick.getY() + brick.getHeight())) {
+			Vy = -Vy;
+			return true;
+
+		} else if ((brick.getX() < ball.getX() + 5 && ball.getX() + 5 < brick
+				.getX() + brick.getWidth())
+				&& ball.getY() + 10 == brick.getY()) {
+			Vy = -Vy;
+			return true;
+
+		}
+		if (brick.getY() < ball.getY() + 5
+				&& ball.getY() + 5 < brick.getY() + brick.getHeight()
+				&& ((ball.getX() + 10 == brick.getX()))) {
+			Vx = -Vx;
+			return true;
+		} else if (brick.getY() < ball.getY() + 5
+				&& ball.getY() + 5 < brick.getY() + brick.getHeight()
+				&& ball.getX() == brick.getX() + brick.getWidth()) {
+			Vx = -Vx;
+			return true;
+		}
+		if (((brick.getX() == ball.getX() + 5) || (ball.getX() + 5 == brick
+				.getX() + brick.getWidth()))
+				&& ((brick.getY() == ball.getY() + 5 || ball.getY() + 5 == brick
+						.getY() + brick.getHeight()))) {
+			Vx = -Vx;
+			Vy = -Vy;
+			return true;
+		}
+		return false;
+	}
+}
 	}

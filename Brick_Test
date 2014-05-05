@@ -9,7 +9,7 @@ public class Brick_Test {
 		frame.setTitle("Test");
 		frame.setSize(600, 620);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Layout layout = new Layout();
+		Layout layout = new Layout();  //genereate a layout from the layout class
 		int x = 0;
 		int y = 0;
 		for (int i = 0; i <2; i++) {

@@ -1,0 +1,238 @@
+//BRICK TEST IS ADDED
+import static org.junit.Assert.*;
+
+import java.awt.Color;
+
+import org.junit.Test;
+
+public class BrickTest {
+
+	// CAN X LOCATION AND Y LOCATION HAVE POSITIVE VALUES?
+	@Test
+	public void testConstructor1() {
+		int x = 20;
+		int y = 20;
+		int width = 20;
+		int height = 20;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// CAN X LOCATION BE 0?
+	@Test
+	public void testConstructor2() {
+		int x = 0;
+		int y = 20;
+		int width = 20;
+		int height = 20;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// CAN Y LOCATION BE 0?
+	@Test
+	public void testConstructor3() {
+		int x = 20;
+		int y = 0;
+		int width = 20;
+		int height = 20;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// CAN X LOCATION BE NEGATIVE VALUE?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor4() {
+		int x = -2;
+		int y = 20;
+		int width = 20;
+		int height = 20;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// CAN Y LOCATION BE NEGATIVE VALUE?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor5() {
+		int x = 20;
+		int y = -2;
+		int width = 20;
+		int height = 20;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// CAN X LOCATION BE BIGGER THAN 600?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor6() {
+		int x = 620;
+		int y = 20;
+		int width = 20;
+		int height = 20;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// CAN Y LOCATION BE BIGGER THAN 600?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor7() {
+		int x = 20;
+		int y = 640;
+		int width = 20;
+		int height = 20;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// CAN WIDTH AND HEIGHT HAVE POSITIVE VALUES?
+	@Test
+	public void testConstructor8() {
+		int x = 20;
+		int y = 20;
+		int width = 20;
+		int height = 20;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// CAN WIDTH BE 0?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor9() {
+		int x = 20;
+		int y = 20;
+		int width = 0;
+		int height = 20;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// CAN HEIGHT BE 0?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor10() {
+		int x = 20;
+		int y = 20;
+		int width = 20;
+		int height = 0;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// CAN WIDTH BE NEGATIVE VALUE?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor11() {
+		int x = 20;
+		int y = 20;
+		int width = -2;
+		int height = 20;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// CAN HEIGHT BE NEGATIVE VALUE?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor12() {
+		int x = 20;
+		int y = 20;
+		int width = 20;
+		int height = -2;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// CAN WIDTH BE BIGGER THAN 40?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor13() {
+		int x = 20;
+		int y = 20;
+		int width = 45;
+		int height = 20;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// CAN HEIGT BE BIGGER THAN 40?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor14() {
+		int x = 20;
+		int y = 20;
+		int width = 20;
+		int height = 45;
+
+		Brick brick = new Brick(x, y, width, height, null);
+
+	}
+
+	// DOES SETMethod WORK PROPERLY?
+	@Test
+	public void testsetMethod1() {
+
+		Brick brick = new Brick(50, 50, 20, 20, null);
+		brick.setX(5);
+		brick.setY(5);
+		assertEquals(5, brick.getX());
+		assertEquals(5, brick.getY());
+
+	}
+
+	// DOES SETMethod WORK GIVES 0?
+	@Test
+	public void testsetMethod2() {
+
+		Brick brick = new Brick(50, 50, 20, 20, null);
+		brick.setX(0);
+		assertEquals(0, brick.getX());
+	}
+
+	// DOES SETMethod WORK GIVES 0?
+	@Test
+	public void testsetMethod3() {
+
+		Brick brick = new Brick(50, 50, 20, 20, null);
+		brick.setY(0);
+		assertEquals(0, brick.getY());
+	}
+
+	// DOES getWidthMethod WORK PROPERLY?
+	@Test
+	public void testgetWidthMethod1() {
+
+		Brick brick = new Brick(50, 50, 20, 20, null);
+		assertEquals(20, brick.getWidth());
+
+	}
+
+	// DOES getHeightMethod WORK PROPERLY?
+	@Test
+	public void testgetHeightMethod1() {
+
+		Brick brick = new Brick(50, 50, 20, 20, null);
+		assertEquals(20, brick.getHeight());
+	}
+	
+	@Test
+	public void testgetColorMethod1() {
+
+		Brick brick = new Brick(50, 50, 20, 20, null);
+		assertEquals(null, brick.getColor());
+	}
+	@Test
+	public void testgetColorMethod2() {
+
+		Brick brick = new Brick(50, 50, 20, 20, Color.RED);
+		assertEquals(java.awt.Color.RED, brick.getColor());
+	}
+
+}

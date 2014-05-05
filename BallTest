@@ -1,0 +1,268 @@
+import static org.junit.Assert.*;
+//TEST CASES FOR BALL CLASS IMPLEMENTED
+import org.junit.Test;
+
+public class BallTest {
+
+	// CAN X LOCATION AND Y LOCATION HAVE POSITIVE VALUES?
+	@Test
+	public void testConstructor1() {
+		int x = 20;
+		int y = 20;
+		int width = 20;
+		int height = 20;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// CAN X LOCATION BE 0?
+	@Test
+	public void testConstructor2() {
+		int x = 0;
+		int y = 20;
+		int width = 20;
+		int height = 20;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// CAN Y LOCATION BE 0?
+	@Test
+	public void testConstructor3() {
+		int x = 20;
+		int y = 0;
+		int width = 20;
+		int height = 20;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// CAN X LOCATION BE NEGATIVE VALUE?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor4() {
+		int x = -2;
+		int y = 20;
+		int width = 20;
+		int height = 20;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// CAN Y LOCATION BE NEGATIVE VALUE?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor5() {
+		int x = 20;
+		int y = -2;
+		int width = 20;
+		int height = 20;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// CAN X LOCATION BE BIGGER THAN 600?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor6() {
+		int x = 620;
+		int y = 20;
+		int width = 20;
+		int height = 20;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// CAN Y LOCATION BE BIGGER THAN 600?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor7() {
+		int x = 20;
+		int y = 640;
+		int width = 20;
+		int height = 20;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// CAN WIDTH AND HEIGHT HAVE POSITIVE VALUES?
+	@Test
+	public void testConstructor8() {
+		int x = 20;
+		int y = 20;
+		int width = 20;
+		int height = 20;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// CAN WIDTH BE 0?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor9() {
+		int x = 20;
+		int y = 20;
+		int width = 0;
+		int height = 20;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// CAN HEIGHT BE 0?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor10() {
+		int x = 20;
+		int y = 20;
+		int width = 20;
+		int height = 0;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// CAN WIDTH BE NEGATIVE VALUE?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor11() {
+		int x = 20;
+		int y = 20;
+		int width = -2;
+		int height = 20;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// CAN HEIGHT BE NEGATIVE VALUE?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor12() {
+		int x = 20;
+		int y = 20;
+		int width = 20;
+		int height = -2;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// CAN WIDTH BE BIGGER THAN 40?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor13() {
+		int x = 20;
+		int y = 20;
+		int width = 45;
+		int height = 20;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// CAN HEIGT BE BIGGER THAN 40?
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor14() {
+		int x = 20;
+		int y = 20;
+		int width = 20;
+		int height = 45;
+
+		Ball ball = new Ball(x, y, width, height);
+
+	}
+
+	// DOES SETMethod WORK PROPERLY?
+	@Test
+	public void testsetMethod1() {
+
+		Ball ball = new Ball(50, 50, 20, 20);
+		ball.setX(5);
+		ball.setY(5);
+		assertEquals(5, ball.getX());
+		assertEquals(5, ball.getY());
+
+	}
+
+	// DOES SETMethod WORK GIVES 0?
+	@Test
+	public void testsetMethod2() {
+
+		Ball ball = new Ball(50, 50, 20, 20);
+		ball.setX(0);
+		assertEquals(0, ball.getX());
+	}
+
+	// DOES SETMethod WORK GIVES 0?
+	@Test
+	public void testsetMethod3() {
+
+		Ball ball = new Ball(50, 50, 20, 20);
+		ball.setY(0);
+		assertEquals(0, ball.getY());
+	}
+
+	// THERE WILL BE IllegalArgumentException BECAUSE OF NEGATIVE VALUE
+	@Test(expected = IllegalArgumentException.class)
+	public void testsetMethod4() {
+
+		Ball ball = new Ball(50, 50, 20, 20);
+		ball.setX(-2);
+		assertEquals(-2, ball.getX());
+	}
+
+	// CAN MOVE Method WORK FOR POSITIVE VALUES?
+	@Test
+	public void testmoveMethod1() {
+
+		Ball ball = new Ball(50, 50, 20, 20);
+		ball.move(3, 0);
+		assertEquals(53, ball.getX());
+	}
+
+	// CAN MOVE Method WORK FOR POSITIVE VALUES?
+	@Test
+	public void testmoveMethod2() {
+
+		Ball ball = new Ball(50, 50, 20, 20);
+		ball.move(0, 3);
+		assertEquals(53, ball.getY());
+	}
+
+	// CAN MOVE Method WORK FOR NEGATIVE VALUES?
+	@Test
+	public void testmoveMethod3() {
+
+		Ball ball = new Ball(50, 50, 20, 20);
+		ball.move(-3,3);
+		assertEquals(47, ball.getX());
+	}
+
+	// CAN MOVE Method WORK FOR NEGATIVE VALUES?
+	@Test
+	public void testmoveMethod4() {
+
+		Ball ball = new Ball(50, 50, 20, 20);
+		ball.move(3,-3);
+		assertEquals(47, ball.getY());
+	}
+
+	// CAN MOVE Method WORK FOR 0?
+	@Test
+	public void testmoveMethod5() {
+
+		Ball ball = new Ball(50, 50, 20, 20);
+		ball.move(0,3);
+		assertEquals(50, ball.getX());
+	}
+
+	// CAN MOVE Method WORK FOR 0?
+	@Test
+	public void testmoveMethod6() {
+
+		Ball ball = new Ball(50, 50, 20, 20);
+		ball.move(3,0);
+		assertEquals(50, ball.getY());
+	}
+
+}

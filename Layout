@@ -1,7 +1,6 @@
 package Brick_Breaker;
 
-//MOVE METHOD IS ADDED 
-//CHECK COLLISION IS ADDED AS WELL. 
+//CONTROL FLOOR ADDED. TRIED TO FIX COLLISION PROBLEM AS WELL.  
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -112,5 +111,21 @@ public class Layout extends JPanel {
 		}
 		return false;
 	}
-}
+	class MyMouseListener extends MouseAdapter {
+	private Floor floor;
+	private int dx;
+
+	public MyMouseListener(Floor floor) {
+		this.floor = floor;
 	}
+
+	public void mousePressed(MouseEvent e) {
+		dx = e.getX() - floor.getX();
+	}
+
+	public void mouseDragged(MouseEvent e) {
+		if (e.getX() - dx < 400)
+			floor.setX(e.getX() - dx);
+	}
+}
+	

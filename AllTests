@@ -1,0 +1,9 @@
+TO RUN TEST CLASSES EASILY.
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+//The summation of all test classes
+@RunWith(Suite.class)
+@SuiteClasses({ BoardTest.class, QueenTest.class, NQueensSolverTest.class })
+public class AllTests {
+}

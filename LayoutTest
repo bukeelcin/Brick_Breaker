@@ -1,0 +1,26 @@
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+
+import org.junit.Test;
+
+public class LayoutTest {
+	//ADDBRICK METHOD HAS BEEN TESTED.
+	@Test
+	public void testAddBrickMethod1() {
+		ArrayList<Brick> bricks = new ArrayList<Brick>();
+		bricks.add(new Brick(10, 10, 20, 20, null));
+		bricks.add(new Brick(10, 10, 20, 20, null));
+		assertEquals(2, bricks.size());
+	}
+
+	@Test
+	public void testAddBrickMethod2() {
+		ArrayList<Brick> bricks = new ArrayList<Brick>();
+		for (int i = 1; i < 6; i++) {
+			bricks.add(new Brick(10, 10, 20, 20, null));
+			assertEquals(i, bricks.size());
+		}
+		assertEquals(5, bricks.size());
+	}
+}

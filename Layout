@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Layout extends JPanel {
+        int level = 1;
 	ArrayList<Brick> bricks;
 	Floor floor;
 	Ball ball;

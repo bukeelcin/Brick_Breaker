@@ -38,6 +38,8 @@ public class Layout extends JPanel {
 
 	public void paint(Graphics g) {
 		super.paint(g);
+		g.setColor(Color.BLACK);
+                g.fillRect(0, 0, 600, 620);
 		g.setColor(Color.BLUE);
 		for (int i = 0; i < bricks.size(); i++) {
 			Brick brick = bricks.get(i);

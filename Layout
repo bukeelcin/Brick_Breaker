@@ -81,7 +81,7 @@ public class Layout extends JPanel {
 				Brick brick = bricks.get(i);
 				if (checkcollision(brick)) {
 					bricks.remove(i);
-
+					score += 10;
 				}
 			}
 			

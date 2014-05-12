@@ -77,6 +77,13 @@ public class Layout extends JPanel {
 			}
 			
 			Thread.currentThread().sleep(15);
+			for (int i = 0; i < bricks.size(); i++) {
+				Brick brick = bricks.get(i);
+				if (checkcollision(brick)) {
+					bricks.remove(i);
+
+				}
+			}
 			
 			if (bricks.size() == 0 && level == 1) {
 

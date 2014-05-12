@@ -73,18 +73,7 @@ public class Layout extends JPanel {
 				Vx = 5;
 				Vy = -5;
 			}
-	                    if (bricks.size() == 0 && level == 1) {
-
-				ball.setX(250);
-				ball.setY(450);
-
-				level = 2;
-				for (int i = 0; i < 8; i++) {
-					for (int j = 0; j < 4; j++) {
-						addBrick(210 + 20 * i, 100 + 20 * j, 20, 20, null);
-					}
-
-			}
+	                    
 			
 			Thread.currentThread().sleep(15);
 			for (int i = 0; i < bricks.size(); i++) {

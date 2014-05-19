@@ -15,7 +15,12 @@ public class Brick_Test {
 		//add the bricks into layout
 		for (int i = 0; i <2; i++) {
 			for (int j = 0; j < i; j++) {
-				layout.addBrick(290 + 20 * j - x, 100 + y, 20, 20, Color.BLACK);
+				if (i == 1 || i == 4) {
+					Brick brick = new Brick(270 + 20 * j - x, 100 + y, 20, 20,
+							null);
+					brick.livesForEachBrick = 3;
+					layout.addBrick(brick);
+				} 
 			}
 			x += 10;
 			y += 20;

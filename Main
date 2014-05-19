@@ -13,8 +13,8 @@ public class Brick_Test {
 		int x = 0;
 		int y = 0;
 		//add the bricks into layout
-		for (int i = 0; i <2; i++) {
-			for (int j = 0; j < i; j++) {
+		for (int i = 1; i <7; i++) {
+			for (int j = 1; j <= i; j++) {
 				if (i == 1 || i == 4) {
 					Brick brick = new Brick(270 + 20 * j - x, 100 + y, 20, 20,
 							null);
@@ -41,7 +41,6 @@ public class Brick_Test {
 		}
 		frame.add(layout);
 		frame.setVisible(true);
-	
 		layout.start();
 			
 	}

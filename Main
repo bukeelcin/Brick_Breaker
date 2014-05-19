@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 public class Brick_Test {
 	public static void main(String[] args) throws InterruptedException {
 		JFrame frame = new JFrame();
-		frame.setTitle("Test");
+		frame.setTitle("Brick_Breaker");
 		frame.setSize(600, 620);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Layout layout = new Layout();  //genereate a layout from the layout class
@@ -20,20 +20,17 @@ public class Brick_Test {
 							null);
 					brick.livesForEachBrick = 3;
 					layout.addBrick(brick);
-				} 
-				else if (i == 2 || i == 3) {
+				} else if (i == 2 || i == 3) {
 					Brick brick = new Brick(270 + 20 * j - x, 100 + y, 20, 20,
 							null);
 					layout.addBrick(brick);
 					brick.livesForEachBrick = 2;
 
-				} 
-				 else {
+				} else {
 					Brick brick = new Brick(270 + 20 * j - x, 100 + y, 20, 20,
 							null);
 					layout.addBrick(brick);
 					brick.livesForEachBrick = 1;
-
 				}
 			}
 			x += 10;

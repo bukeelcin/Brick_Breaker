@@ -1,4 +1,4 @@
-//FLOOR CLASS IS CHANGED DEPENDING ON FLOOR TEST CLASS
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.MouseInfo;
@@ -7,24 +7,23 @@ import java.awt.PointerInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Floor extends Brick {
-	private int x, y, width, height;
-	private Color color;
+public class Floor{
+	public int x, y, width, height;
+	public Color color;
 
 	public Floor(int x, int y, int width, int height) {
 
-		super(x, y, width, height, Color.GREEN);
-
+		
 		if (x < 0 || x > 600) {
 			throw new IllegalArgumentException("WRONG LOCATION");
 		}
 		if (y < 0 || y > 620) {
 			throw new IllegalArgumentException("WRONG LOCATION");
 		}
-		if (width <= 0 || width > 40) {
+		if (width <= 0 || width > 600) {
 			throw new IllegalArgumentException("WRONG WIDTH");
 		}
-		if (height <= 0 || height > 600) {
+		if (height <= 0 || height > 40) {
 			throw new IllegalArgumentException("WRONG HEIGHT");
 		}
 
@@ -60,6 +59,9 @@ public class Floor extends Brick {
 
 	public int getWidth() {
 		return width;
+	}
+	public int getHeight() {
+		return height;
 	}
 
 }

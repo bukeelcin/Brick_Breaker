@@ -1,3 +1,4 @@
+//NEW VERSION IS ADDED.
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -12,7 +13,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import acm.util.RandomGenerator;
+
 public class Layout extends JPanel {
+
+	RandomGenerator random = new RandomGenerator();
 	int level = 1;
 	int score = 0;
 	int lives = 3;
@@ -38,7 +43,7 @@ public class Layout extends JPanel {
 
 	public void paint(Graphics g) {
 		super.paint(g);
-		
+
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 600, 620);
 
@@ -55,7 +60,7 @@ public class Layout extends JPanel {
 				brick.drawOn(g);
 			}
 		}
-		floor.drawOn(g);
+		floor.drawOn(g, floor.width);
 		ball.drawOn(g);
 
 		g.setColor(Color.WHITE);
@@ -68,13 +73,16 @@ public class Layout extends JPanel {
 
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-		g.drawString("LIVES:" + lives, 370, 30);
+		g.drawString("LIVES: ", 370, 30);
+		for (int i = 1; i <= lives; i++) {
+			g.draw3DRect(420 + i * 25, 12, 20, 20, true);
 
-		 if (lives == 0) {
-		 g.setColor(Color.WHITE);
-		 g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-		 g.drawString("YOU LOSE!", 240, 300);
-		 }
+		}
+		if (lives == 0) {
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+			g.drawString("YOU LOSE!", 240, 300);
+		}
 		if (bricks.size() == 0 && level == 3) {
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
@@ -83,6 +91,7 @@ public class Layout extends JPanel {
 		}
 
 	}
+
 	public void start() throws InterruptedException {
 		Vx = 5;
 		Vy = -5;
@@ -103,19 +112,22 @@ public class Layout extends JPanel {
 				Vx = 5;
 				Vy = -5;
 			}
-			// if (lives == 0) {
-			// move = false;
-			// }
+			if (lives == 0) {
+				move = false;
+			}
 			Thread.currentThread().sleep(15);
 			for (int i = 0; i < bricks.size(); i++) {
 				Brick brick = bricks.get(i);
 				if (checkcollision(brick)) {
-					bricks.remove(i);
-					score += 10;
-               
+					brick.livesForEachBrick -= 1;
+					if (brick.livesForEachBrick == 0) {
+						bricks.remove(i);
+						score += 10;
+						
+					}
 				}
-				
 			}
+
 			if (bricks.size() == 0 && level == 1) {
 
 				ball.setX(250);
@@ -124,17 +136,16 @@ public class Layout extends JPanel {
 				level = 2;
 				for (int i = 0; i < 8; i++) {
 					for (int j = 0; j < 4; j++) {
-					Brick brick = new Brick(210 + 20 * i, 100 + 20 * j, 20,20, null);
- 						if(i % 3 == 0){
+						Brick brick = new Brick(210 + 20 * i, 100 + 20 * j, 20,
+								20, null);
+						if (i % 3 == 0) {
 							brick.livesForEachBrick = 3;
-						}
-						else if(i == 1 || i == 4 || i == 7){
+						} else if (i == 1 || i == 4 || i == 7) {
 							brick.livesForEachBrick = 2;
-						}
-						else {
+						} else {
 							brick.livesForEachBrick = 1;
 						}
-                                                addBrick(brick);
+						addBrick(brick);
 					}
 
 				}
@@ -158,19 +169,17 @@ public class Layout extends JPanel {
 				int y = 0;
 				for (int i = 0; i < 6; i++) {
 					for (int j = 0; j < i; j++) {
-					Brick brick = new Brick(125 + 20 * j - x, 50 + y, 20,20, null);
-						if(i == 0 || i == 3){
+						Brick brick = new Brick(125 + 20 * j - x, 50 + y, 20,
+								20, null);
+						if (i == 0 || i == 3) {
 							brick.livesForEachBrick = 3;
-						}
-						else if(i == 1 || i == 4){
+						} else if (i == 1 || i == 4) {
 							brick.livesForEachBrick = 2;
-						}
-						else {
+						} else {
 							brick.livesForEachBrick = 1;
-
+						}
+						addBrick(brick);
 					}
-					addBrick(brick);
-				}	
 					x = 0;
 					y += 20;
 				}
@@ -180,7 +189,9 @@ public class Layout extends JPanel {
 
 				for (int i = 0; i < 6; i++) {
 					for (int j = 0; j < i; j++) {
-						addBrick(450 + 20 * j + x, 50 + y, 20, 20, null);
+						Brick brick = new Brick(450 + 20 * j + x, 50 + y, 20,
+								20, null);
+						addBrick(brick);
 					}
 					x -= 20;
 					y += 20;
@@ -245,7 +256,7 @@ public class Layout extends JPanel {
 		if (((brick.getX() == ball.getX() + 5) || (ball.getX() + 5 == brick
 				.getX() + brick.getWidth()))
 				&& ((brick.getY() == ball.getY() + 5 || ball.getY() + 5 == brick
-						.getY() + brick.getHeight()))) {
+				.getY() + brick.getHeight()))) {
 			Vx = -Vx;
 			Vy = -Vy;
 			return true;
@@ -267,7 +278,7 @@ class MyMouseListener extends MouseAdapter {
 	}
 
 	public void mouseDragged(MouseEvent e) {
-		if (0 < e.getX() - dx && e.getX() - dx < 484)
+		if (-20 < e.getX() - dx && e.getX() - dx < 500)
 			floor.setX(e.getX() - dx);
 	}
 }

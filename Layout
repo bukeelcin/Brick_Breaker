@@ -1,7 +1,10 @@
+//GAME OVER PART 1 IS ADDED.
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -30,20 +33,22 @@ public class Layout extends JPanel {
 		addMouseMotionListener(listener);
 	}
 
-	public void addBrick(int x, int y, int width, int height, Color color) {
-		bricks.add(new Brick(x, y, width, height, color));
+	public void addBrick(Brick brick) {
+		bricks.add(brick);
 	}
 
 	public void paint(Graphics g) {
 		super.paint(g);
-
+		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 600, 620);
 
-		g.setColor(Color.BLUE);
 		for (int i = 0; i < bricks.size(); i++) {
 			Brick brick = bricks.get(i);
-			brick.drawOn(g);
+			
+				brick.color = Color.RED;
+				brick.drawOn(g);
+			
 		}
 		floor.drawOn(g);
 		ball.drawOn(g);
@@ -60,11 +65,7 @@ public class Layout extends JPanel {
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		g.drawString("LIVES:" + lives, 370, 30);
 
-		// if (lives == 0) {
-		// g.setColor(Color.WHITE);
-		// g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-		// g.drawString("YOU LOSE!", 240, 300);
-		// }
+		 
 		if (bricks.size() == 0 && level == 3) {
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
@@ -94,18 +95,19 @@ public class Layout extends JPanel {
 				Vx = 5;
 				Vy = -5;
 			}
-			// if (lives == 0) {
-			// move = false;
-			// }
+			 if (lives == 0) {
+			 move = false;
+			 }
 			Thread.currentThread().sleep(15);
 			for (int i = 0; i < bricks.size(); i++) {
 				Brick brick = bricks.get(i);
 				if (checkcollision(brick)) {
-					bricks.remove(i);
-					score += 10;
-
+						bricks.remove(i);
+						score += 10;
+					
 				}
 			}
+
 			if (bricks.size() == 0 && level == 1) {
 
 				ball.setX(250);
@@ -114,7 +116,9 @@ public class Layout extends JPanel {
 				level = 2;
 				for (int i = 0; i < 8; i++) {
 					for (int j = 0; j < 4; j++) {
-						addBrick(210 + 20 * i, 100 + 20 * j, 20, 20, null);
+						Brick brick = new Brick(210 + 20 * i, 100 + 20 * j, 20,
+								20, null);
+						addBrick(brick);
 					}
 
 				}
@@ -138,7 +142,9 @@ public class Layout extends JPanel {
 				int y = 0;
 				for (int i = 0; i < 6; i++) {
 					for (int j = 0; j < i; j++) {
-						addBrick(125 + 20 * j - x, 50 + y, 20, 20, null);
+						Brick brick = new Brick(125 + 20 * j - x, 50 + y, 20,
+								20, null);
+						addBrick(brick);
 					}
 					x = 0;
 					y += 20;
@@ -149,7 +155,9 @@ public class Layout extends JPanel {
 
 				for (int i = 0; i < 6; i++) {
 					for (int j = 0; j < i; j++) {
-						addBrick(450 + 20 * j + x, 50 + y, 20, 20, null);
+						Brick brick = new Brick(450 + 20 * j + x, 50 + y, 20,
+								20, null);
+						addBrick(brick);
 					}
 					x -= 20;
 					y += 20;
@@ -239,4 +247,63 @@ class MyMouseListener extends MouseAdapter {
 		if (0 < e.getX() - dx && e.getX() - dx < 484)
 			floor.setX(e.getX() - dx);
 	}
+}
+
+class KeyInputHandler extends KeyAdapter {
+
+	/** True if the left cursor key is currently pressed */
+	static boolean upPressed = false;
+
+	/** True if the right cursor key is currently pressed */
+	static boolean downPressed = false;
+
+	static boolean rightPressed = false;
+
+	/** True if the right cursor key is currently pressed */
+	static boolean leftPressed = false;
+
+	/** True if we are firing */
+	static boolean firePressed = false;
+
+	static boolean clearAllPressed = false;
+
+	public void keyPressed(KeyEvent e) {
+
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			upPressed = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			downPressed = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			leftPressed = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			rightPressed = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			firePressed = true;
+		}
+	}
+
+	public void keyReleased(KeyEvent e) {
+
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			upPressed = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			downPressed = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			rightPressed = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			leftPressed = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			firePressed = false;
+		}
+
+	}
+
 }

@@ -1,4 +1,3 @@
-//GAME OVER PART2 IS ADDED.
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -45,10 +44,16 @@ public class Layout extends JPanel {
 
 		for (int i = 0; i < bricks.size(); i++) {
 			Brick brick = bricks.get(i);
-			
+			if (brick.livesForEachBrick == 3) {
+				brick.color = Color.YELLOW;
+				brick.drawOn(g);
+			} else if (brick.livesForEachBrick == 2) {
+				brick.color = Color.GREEN;
+				brick.drawOn(g);
+			} else if (brick.livesForEachBrick == 1) {
 				brick.color = Color.RED;
 				brick.drawOn(g);
-			
+			}
 		}
 		floor.drawOn(g);
 		ball.drawOn(g);
@@ -78,7 +83,6 @@ public class Layout extends JPanel {
 		}
 
 	}
-
 	public void start() throws InterruptedException {
 		Vx = 5;
 		Vy = -5;
@@ -99,19 +103,19 @@ public class Layout extends JPanel {
 				Vx = 5;
 				Vy = -5;
 			}
-			 if (lives == 0) {
-			 move = false;
-			 }
+			// if (lives == 0) {
+			// move = false;
+			// }
 			Thread.currentThread().sleep(15);
 			for (int i = 0; i < bricks.size(); i++) {
 				Brick brick = bricks.get(i);
 				if (checkcollision(brick)) {
-						bricks.remove(i);
-						score += 10;
-					
+					bricks.remove(i);
+					score += 10;
+               
 				}
+				
 			}
-
 			if (bricks.size() == 0 && level == 1) {
 
 				ball.setX(250);
@@ -120,9 +124,7 @@ public class Layout extends JPanel {
 				level = 2;
 				for (int i = 0; i < 8; i++) {
 					for (int j = 0; j < 4; j++) {
-						Brick brick = new Brick(210 + 20 * i, 100 + 20 * j, 20,
-								20, null);
-						addBrick(brick);
+						addBrick(210 + 20 * i, 100 + 20 * j, 20, 20, null);
 					}
 
 				}
@@ -146,9 +148,7 @@ public class Layout extends JPanel {
 				int y = 0;
 				for (int i = 0; i < 6; i++) {
 					for (int j = 0; j < i; j++) {
-						Brick brick = new Brick(125 + 20 * j - x, 50 + y, 20,
-								20, null);
-						addBrick(brick);
+						addBrick(125 + 20 * j - x, 50 + y, 20, 20, null);
 					}
 					x = 0;
 					y += 20;
@@ -159,9 +159,7 @@ public class Layout extends JPanel {
 
 				for (int i = 0; i < 6; i++) {
 					for (int j = 0; j < i; j++) {
-						Brick brick = new Brick(450 + 20 * j + x, 50 + y, 20,
-								20, null);
-						addBrick(brick);
+						addBrick(450 + 20 * j + x, 50 + y, 20, 20, null);
 					}
 					x -= 20;
 					y += 20;
@@ -251,63 +249,4 @@ class MyMouseListener extends MouseAdapter {
 		if (0 < e.getX() - dx && e.getX() - dx < 484)
 			floor.setX(e.getX() - dx);
 	}
-}
-
-class KeyInputHandler extends KeyAdapter {
-
-	/** True if the left cursor key is currently pressed */
-	static boolean upPressed = false;
-
-	/** True if the right cursor key is currently pressed */
-	static boolean downPressed = false;
-
-	static boolean rightPressed = false;
-
-	/** True if the right cursor key is currently pressed */
-	static boolean leftPressed = false;
-
-	/** True if we are firing */
-	static boolean firePressed = false;
-
-	static boolean clearAllPressed = false;
-
-	public void keyPressed(KeyEvent e) {
-
-		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			upPressed = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			downPressed = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			leftPressed = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			rightPressed = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			firePressed = true;
-		}
-	}
-
-	public void keyReleased(KeyEvent e) {
-
-		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			upPressed = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			downPressed = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			rightPressed = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			leftPressed = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			firePressed = false;
-		}
-
-	}
-
 }

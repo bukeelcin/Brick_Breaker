@@ -21,6 +21,13 @@ public class Brick_Test {
 					brick.livesForEachBrick = 3;
 					layout.addBrick(brick);
 				} 
+				else if (i == 2 || i == 3) {
+					Brick brick = new Brick(270 + 20 * j - x, 100 + y, 20, 20,
+							null);
+					layout.addBrick(brick);
+					brick.livesForEachBrick = 2;
+
+				} 
 			}
 			x += 10;
 			y += 20;

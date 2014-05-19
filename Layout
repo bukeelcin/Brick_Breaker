@@ -169,6 +169,8 @@ public class Layout extends JPanel {
 							brick.livesForEachBrick = 1;
 
 					}
+					addBrick(brick);
+				}	
 					x = 0;
 					y += 20;
 				}

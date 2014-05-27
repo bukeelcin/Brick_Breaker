@@ -1,0 +1,200 @@
+import java.awt.font.LayoutPath;
+
+import acm.util.RandomGenerator;
+
+
+public class GameLogic {
+	
+	int Vx, Vy;
+
+	int levelCounter;
+	RandomGenerator random = new RandomGenerator();
+	Layout layout = new Layout();
+
+	public GameLogic(Layout layout) {
+		this.layout = layout;
+	}
+
+	public void start() throws InterruptedException {
+		Vx = 5;
+		Vy = -5;
+		boolean move = true;
+		while (move) {
+			Layout.ball.move(Vx, Vy);
+			if (Layout.ball.getX() == 480 || Layout.ball.getX() == 0) {
+				Vx = -Vx;
+			}
+			if ((Layout.ball.getY() == 0) || (bounce() && Layout.ball.getY() == 540)) {
+
+				Vy = -Vy;
+			}
+			if (Layout.ball.getY() > 600) {
+				Layout.lives -= 1;
+				Layout.ball.setX(250);
+				Layout.ball.setY(450);
+				Vx = 5;
+				Vy = -5;
+			}
+			if (Layout.lives == 0) {
+				move = false;
+			}
+			Thread.currentThread().sleep(15);
+			for (int i = 0; i < Layout.bricks.size(); i++) {
+				Brick brick = Layout.bricks.get(i);
+				if (checkcollision(brick)) {
+					brick.livesForEachBrick -= 1;
+					if (brick.livesForEachBrick == 0) {
+						Layout.bricks.remove(i);
+						Layout.score += 10;
+						if(brick.randomness == 1){
+							Layout.bonus = new Bonus(brick.getX(), brick.getY(), 20, 20);
+						Layout.speedForBonus = 3;
+					}
+
+				}
+			}
+		}
+
+		if (Layout.bricks.size() == 0 && Layout.level == 1) {
+
+			Layout.ball.setX(250);
+			Layout.ball.setY(450);
+
+			Layout.level = 2;
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 4; j++) {
+					Brick brick = new Brick(175 + 20 * i, 100 + 20 * j, 20,
+							20, null);
+					if (i % 3 == 0) {
+						brick.livesForEachBrick = 3;
+						
+						
+					} else if (i == 1 || i == 4 || i == 7) {
+						brick.livesForEachBrick = 2;
+					} else {
+						brick.livesForEachBrick = 1;
+					}
+					int randomness = random.nextInt(2);
+					brick.randomness = randomness;
+					Layout.addBrick(brick);
+				}
+
+			}
+			while (levelCounter <= 500000) {
+				levelCounter++;
+				Vx = 0;
+				Vy = 0;
+				Layout.ball.move(0, 0);
+			}
+
+			Vx = 5;
+			Vy = -5;
+			levelCounter = 0;
+		} else if (Layout.bricks.size() == 0 && Layout.level == 2) {
+
+			Layout.ball.setX(250);
+			Layout.ball.setY(450);
+
+			Layout.level = 3;
+			int x = 0;
+			int y = 0;
+			for (int i = 0; i < 6; i++) {
+				for (int j = 0; j < i; j++) {
+					Brick brick = new Brick(100 + 20 * j - x, 50 + y, 20,
+							20, null);
+					if (i == 0 || i == 3) {
+						brick.livesForEachBrick = 3;
+					} else if (i == 1 || i == 4) {
+						brick.livesForEachBrick = 2;
+					} else {
+						brick.livesForEachBrick = 1;
+					}
+					int randomness = random.nextInt(2);
+					brick.randomness = randomness;
+					Layout.addBrick(brick);
+				}
+				x = 0;
+				y += 20;
+			}
+
+			x = 0;
+			y = 0;
+
+			for (int i = 0; i < 6; i++) {
+				for (int j = 0; j < i; j++) {
+					Brick brick = new Brick(450 + 20 * j + x, 50 + y, 20,
+							20, null);
+					Layout.addBrick(brick);
+				}
+				x -= 20;
+				y += 20;
+			}
+			while (levelCounter <= 500000) {
+				levelCounter++;
+				Vx = 0;
+				Vy = 0;
+				Layout.ball.move(0, 0);
+			}
+
+			Vx = 5;
+			Vy = -5;
+		} else if (Layout.bricks.size() == 0 && Layout.level == 3) {
+
+			Layout.ball.setX(250);
+			Layout.ball.setY(350);
+			Vx = 0;
+			Vy = 0;
+
+			Layout.ball.move(0, 0);
+			move = false;
+		}
+
+		this.layout.repaint();
+
+	}
+}
+
+public boolean bounce() {
+	return Layout.floor.getX() <= Layout.ball.getX()
+			&& Layout.ball.getX() <= Layout.floor.getX() + Layout.floor.getWidth();
+
+}
+
+public boolean checkcollision(Brick brick) {
+
+	if ((brick.getX() < Layout.ball.getX() + 5 && Layout.ball.getX() + 5 < brick.getX()
+			+ brick.getWidth())
+			&& (Layout.ball.getY() == brick.getY() + brick.getHeight())) {
+		Vy = -Vy;
+		return true;
+
+	} else if ((brick.getX() < Layout.ball.getX() + 5 && Layout.ball.getX() + 5 < brick
+			.getX() + brick.getWidth())
+			&& Layout.ball.getY() + 10 == brick.getY()) {
+		Vy = -Vy;
+		return true;
+
+	}
+	if (brick.getY() < Layout.ball.getY() + 5
+			&& Layout.ball.getY() + 5 < brick.getY() + brick.getHeight()
+			&& ((Layout.ball.getX() + 10 == brick.getX()))) {
+		Vx = -Vx;
+		return true;
+	} else if (brick.getY() < Layout.ball.getY() + 5
+			&& Layout.ball.getY() + 5 < brick.getY() + brick.getHeight()
+			&& Layout.ball.getX() == brick.getX() + brick.getWidth()) {
+		Vx = -Vx;
+		return true;
+	}
+	if (((brick.getX() == Layout.ball.getX() + 5) || (Layout.ball.getX() + 5 == brick
+			.getX() + brick.getWidth()))
+			&& ((brick.getY() == Layout.ball.getY() + 5 || Layout.ball.getY() + 5 == brick
+			.getY() + brick.getHeight()))) {
+		Vx = -Vx;
+		Vy = -Vy;
+		return true;
+	}
+	return false;
+}
+
+}

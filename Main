@@ -65,6 +65,7 @@ public class BrickBreaker {
 		}
 		GameLogic gameLogic = new GameLogic(layout);
 		gameLogic.start();
+		
 
 	}
 }

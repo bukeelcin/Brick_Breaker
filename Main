@@ -1,45 +1,70 @@
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.font.LayoutPath;
 
 import javax.swing.JFrame;
 
-public class Brick_Test {
+import acm.util.RandomGenerator;
+
+public class BrickBreaker {
 	public static void main(String[] args) throws InterruptedException {
+		
+		RandomGenerator random = new RandomGenerator();
 		JFrame frame = new JFrame();
 		frame.setTitle("Brick_Breaker");
-		frame.setSize(600, 620);
+		frame.setSize(500, 610);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Layout layout = new Layout();  //genereate a layout from the layout class
+		Layout layout = new Layout();
+		frame.add(layout);
+		frame.setVisible(true);
+		
+		
 		int x = 0;
 		int y = 0;
-		//add the bricks into layout
-		for (int i = 1; i <7; i++) {
+		for (int i = 1; i < 7; i++) {
 			for (int j = 1; j <= i; j++) {
 				if (i == 1 || i == 4) {
-					Brick brick = new Brick(270 + 20 * j - x, 100 + y, 20, 20,
+					Brick brick = new Brick(200 + 20 * j - x, 100 + y, 20, 20,
 							null);
+
+					int randomness = random.nextInt(2);
+					brick.randomness = randomness;
+					System.out.print(brick.randomness);
+					
 					brick.livesForEachBrick = 3;
-					layout.addBrick(brick);
+					Layout.addBrick(brick);
 				} else if (i == 2 || i == 3) {
-					Brick brick = new Brick(270 + 20 * j - x, 100 + y, 20, 20,
+					Brick brick = new Brick(200 + 20 * j - x, 100 + y, 20, 20,
 							null);
-					layout.addBrick(brick);
+					Layout.addBrick(brick);
+
+					int randomness = random.nextInt(2);
+					brick.randomness = randomness;
+					System.out.print(brick.randomness);
+					brick.livesForEachBrick = 3;
+					
 					brick.livesForEachBrick = 2;
 
 				} else {
-					Brick brick = new Brick(270 + 20 * j - x, 100 + y, 20, 20,
+					Brick brick = new Brick(200 + 20 * j - x, 100 + y, 20, 20,
 							null);
-					layout.addBrick(brick);
+					Layout.addBrick(brick);
+					
+					int randomness = random.nextInt(2);
+					brick.randomness = randomness;
+					System.out.print(brick.randomness);
+					brick.livesForEachBrick = 3;
+					
 					brick.livesForEachBrick = 1;
+
 				}
 			}
+			System.out.println();
 			x += 10;
 			y += 20;
 		}
-		frame.add(layout);
-		frame.setVisible(true);
-		layout.start();
-			
-	}
+		GameLogic gameLogic = new GameLogic(layout);
+		gameLogic.start();
 
+	}
 }
